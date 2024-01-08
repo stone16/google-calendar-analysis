@@ -14,7 +14,6 @@ os.environ['https_proxy'] = 'https://127.0.0.1:7890'
 
 SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"]
 
-
 def get_creds():
     """Retrieve user credentials for Google Calendar API."""
     creds = None
