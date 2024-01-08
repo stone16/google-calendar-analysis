@@ -80,7 +80,7 @@ def main():
         print("======== calculating time spend ========")
         time_spent = calculate_time_spent(service, calendar_list, from_date_dt, end_date_dt)
         print("======== plotting graph ========")
-        plot_time_spent(time_spent, calendar_list, f"{from_date_dt.date()} to {end_date_dt.date()}")
+        plot_time_spent(time_spent, calendar_list, f"{start_date} to {end_date}")
     except HttpError as error:
         print(f"An error occurred: {error}")
 
