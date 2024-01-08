@@ -24,7 +24,9 @@ def calculate_time_spent(service, calendar_list, from_date, to_date):
 
     # Convert from_date and to_date to datetime objects in Shanghai timezone
     from_date_dt = shanghai_tz.localize(datetime.strptime(from_date, "%Y-%m-%d"))
-    to_date_dt = shanghai_tz.localize(datetime.strptime(to_date, "%Y-%m-%d"))
+
+    # Need to add one day as time is exclusive per doc https://developers.google.com/calendar/api/v3/reference/events/list
+    to_date_dt = shanghai_tz.localize(datetime.strptime(to_date, "%Y-%m-%d")) + timedelta(days=1)
 
     time_spent = {}
 
@@ -57,7 +59,7 @@ def main():
                         credentials=get_creds())
         calendar_list = get_calendar_list(service)
         calendar_map = {entry['id']: entry['summary'] for entry in calendar_list}
-        time_spent = calculate_time_spent(service, calendar_list, "2024-01-01", "2024-01-07")
+        time_spent = calculate_time_spent(service, calendar_list, "2024-01-07", "2024-01-07")
         plot_time_spent(time_spent, calendar_map)
     except HttpError as error:
         print(f"An error occurred: {error}")
